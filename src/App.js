@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Grid, Grommet } from 'grommet';
+import React from 'react';
+import "./app.css"
+
+
+// import custom components
+import Header from './components/header'
+import AddPanel from './components/panels/addPanel'
+import DataTablePanel from "./components/panels/dataTablePanel"
 
 function App() {
+
+  const [editData, setEditData] = React.useState({});
+
+  const theme = {
+    global: {
+      colors: {
+        'brand': '#1D337C',
+        'accent-1': '#06164a',
+        'focus': '#06164a'
+      },
+      font: {
+        family: 'Poppins',
+        size: '16px',
+        height: '18px',
+      },
+    },
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Grommet theme={theme}>
+      <Box fill background="light-2">
+        <Header/>
+        <Grid
+          rows={['large']}
+          columns={['medium', 'auto']}
+          gap="xsmall"
+          areas={[
+            { name: 'add-panel', start: [0, 0], end: [0, 0] },
+            { name: 'data-panel', start: [1, 0], end: [1, 0] },
+          ]}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Box pad={{vertical: "medium", horizontal: "medium"}} gridArea="add-panel" background="white">
+            <AddPanel editData={editData} setEditData={setEditData}/>
+          </Box>
+          <Box pad={{vertical: "large", horizontal: "medium"}} gridArea="data-panel" background="white">
+            <DataTablePanel setEditData={setEditData}/>
+          </Box>
+        </Grid>
+      </Box>
+    </Grommet>
   );
 }
 
