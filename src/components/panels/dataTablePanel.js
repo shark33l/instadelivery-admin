@@ -61,7 +61,7 @@ const DataTablePanel = (props) => {
     const getFinalState = (data) => {
         
         let keys = ["delivered_date","received_date","shipped_date","ready_date","ordered_date"];
-        let colors = ["#00C781", "lime", "#FFAA15", "#FFCA58", "#FF4040"]
+        let colors = ["#00873D", "#00C781", "#FFCA58", "#fa9200", "#FF4040"]
         let finalStatus = {};
 
         for(let i=0; i < keys.length; i++){
