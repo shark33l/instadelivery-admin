@@ -1,9 +1,10 @@
 import React from 'react'
 import { Box, Button, TextInput, Table, TableHeader, TableRow, TableCell, TableBody, Text, Form, FormField, Spinner } from 'grommet';
-import { Search, FormEdit } from 'grommet-icons';
+import { Search, FormEdit, CircleAlert } from 'grommet-icons';
 
-// Firebase
+// custom exported functions
 import firebaseFunctions from "../../firebaseFunctions.js";
+import helper from "../../helperFunctions.js"
 
 const DataTablePanel = (props) => {
 
@@ -60,14 +61,17 @@ const DataTablePanel = (props) => {
     const getFinalState = (data) => {
         
         let keys = ["delivered_date","received_date","shipped_date","ready_date","ordered_date"];
+        let colors = ["#00C781", "lime", "#FFAA15", "#FFCA58", "#FF4040"]
         let finalStatus = {};
 
         for(let i=0; i < keys.length; i++){
             if(keys[i] in data){
                 finalStatus = {
                     status : (keys[i].split('_')[0]),
-                    date : data[keys[i]].toLocaleString()
+                    date : data[keys[i]].toLocaleString(),
+                    color : colors[i]
                 }
+                break;
             }
         }
 
@@ -155,14 +159,19 @@ const DataTablePanel = (props) => {
                                             border="bottom"
                                             pad={{vertical:"medium", horizontal: "small"}}
                                         >
-                                            {getFinalState(tracked).status}
+                                            <div style={{ display: 'flex'}}>
+                                                <div 
+                                                    style={{background: getFinalState(tracked).color, height: '20px', width: '20px', borderRadius: '50%', margin: '-2px 10px 0px 0px'}}>
+                                                </div>
+                                                {getFinalState(tracked).status}
+                                            </div>
                                         </TableCell>
                                         <TableCell 
                                             size="xlarge" 
                                             border="bottom"
                                             pad={{vertical:"medium", horizontal: "small"}}
                                         >
-                                            {getFinalState(tracked).date}
+                                            {helper.formatDate(getFinalState(tracked).date)}
                                         </TableCell>
                                         <TableCell 
                                             size="small" 

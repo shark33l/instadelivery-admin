@@ -31,8 +31,19 @@ const AddPanel = (props) => {
         setEntryType(1);
     }
 
+    const validateValues = (values) => {
+        for (let key in values){
+            if(values[key] === undefined || !values[key]){
+                delete values[key]
+            }
+        }
+
+        return values;
+    }
+
     const submitEntry = (value) => {
-        value.invoice = value.invoice.toUpperCase()
+        value.invoice = value.invoice.toUpperCase();
+        value = validateValues(value);
         setLoading(true);
         firebaseFunctions.setTrackingData(value, function(error){
             if(error){
