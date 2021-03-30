@@ -52,6 +52,10 @@ const AddPanel = (props) => {
                 setValue({});
                 setEntryType(0);
                 entryFormRef.current.reset();
+
+                if(props.setLoadFirebaseData){
+                    props.setLoadFirebaseData(!props.loadFirebaseData);
+                }
             }
 
             setLoading(false);

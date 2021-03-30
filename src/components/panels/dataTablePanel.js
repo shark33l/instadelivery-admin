@@ -28,7 +28,7 @@ const DataTablePanel = (props) => {
         
         fetchData();
 
-    },[])
+    },[props.loadFirebaseData])
 
     const getSearchedData = async(searchTerm) => {
         setIsLoadingData(true);

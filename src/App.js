@@ -11,6 +11,7 @@ import DataTablePanel from "./components/panels/dataTablePanel"
 function App() {
 
   const [editData, setEditData] = React.useState({});
+  const [loadFirebaseData, setLoadFirebaseData] = React.useState(true)
 
   const theme = {
     global: {
@@ -41,10 +42,10 @@ function App() {
           ]}
         >
           <Box pad={{vertical: "medium", horizontal: "medium"}} gridArea="add-panel" background="white">
-            <AddPanel editData={editData} setEditData={setEditData}/>
+            <AddPanel editData={editData} setEditData={setEditData} loadFirebaseData={loadFirebaseData} setLoadFirebaseData={setLoadFirebaseData}/>
           </Box>
           <Box pad={{vertical: "large", horizontal: "medium"}} gridArea="data-panel" background="white">
-            <DataTablePanel setEditData={setEditData}/>
+            <DataTablePanel setEditData={setEditData} loadFirebaseData={loadFirebaseData}/>
           </Box>
         </Grid>
       </Box>

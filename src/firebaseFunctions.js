@@ -18,7 +18,7 @@ const firebaseFunctions = {
     },
     getAllTrackingData : async() => {
         try {
-            const snapshot = await ordersRef.get();
+            const snapshot = await ordersRef.orderBy('invoice','desc').get();
             let response = snapshot.docs.map(doc => doc.data())
             return {error: false, response: response};
         } catch(error){
