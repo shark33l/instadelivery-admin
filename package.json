@@ -2,6 +2,10 @@
   "name": "instadelivery-admin",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.13.7",
+    "node": "13.11.0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
