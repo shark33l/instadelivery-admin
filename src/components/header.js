@@ -24,7 +24,7 @@ const Header = (props) => {
         >
             <div style={{ display: 'flex' }}>
                 <img src={logo} className="app-logo" alt="logo" />
-                <p style={{fontSize: "18px"}}><span className="app-title">InstaDelivery</span> Admin Console</p>
+                <p style={{fontSize: "18px"}}><span className="app-title">InstaBuy</span> Admin Console</p>
             </div>
             {currentUser &&
                 <Button 
