@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grommet } from 'grommet';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import "./app.css"
+import "./App.css"
 
 
 // import custom components
