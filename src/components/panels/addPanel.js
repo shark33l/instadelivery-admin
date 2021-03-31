@@ -73,8 +73,10 @@ const AddPanel = (props) => {
         <>
             {entryType !== 0 &&
                 <Box
+                    animation={{type:"slideDown", delay:0, size:"large", duration:500}}
                     justify="center"
                     align="start"
+                    pad={{bottom:"medium"}}
                 >
                     <Button 
                         secondary 
@@ -88,7 +90,7 @@ const AddPanel = (props) => {
                 </Box>
             }
             {entryType === 0 ?
-                <Heading level="4">Add New Entry</Heading>
+                <Heading level="4" style={{marginTop: 0}}>Add New Entry</Heading>
                 :
                 <Heading level="4">Edit Existing Entry : <span style={{color: "#a1a1a1"}}>{props.editData ? props.editData.invoice : ''}</span></Heading>
             }
@@ -98,6 +100,7 @@ const AddPanel = (props) => {
                 onChange={nextValue => setValue(nextValue)}
                 onReset={() => {if(entryType===1){setValue({invoice: value.invoice})}else{setValue({})}}}
                 onSubmit={({ value }) => { submitEntry(value) }}
+                defaultValue={{invoice:"", name:""}}
             >
                 <FormField name="invoice" htmlFor="invoice-id" label="Invoice Number" required>
                     <TextInput id="invoice-id" name="invoice" disabled={entryType===1}/>

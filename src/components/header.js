@@ -1,5 +1,7 @@
 import React from 'react'
 import { Box, Button } from 'grommet';
+import firebase from '../firebase'
+import { AuthContext } from "../Auth.js";
 
 // CSS Import
 import './header.css'
@@ -7,6 +9,7 @@ import './header.css'
 import logo from './instabuylogo.png';
 
 const Header = (props) => {
+    const { currentUser } = React.useContext(AuthContext);
     return(
         <Box
             tag= 'header'
@@ -23,7 +26,16 @@ const Header = (props) => {
                 <img src={logo} className="app-logo" alt="logo" />
                 <p style={{fontSize: "18px"}}><span className="app-title">InstaDelivery</span> Admin Console</p>
             </div>
-            <Button primary hoverIndicator='accent-1' focusIndicator={false} label="logout" className="button-style"/>
+            {currentUser &&
+                <Button 
+                primary 
+                hoverIndicator='accent-1' 
+                focusIndicator={false} 
+                label="logout" 
+                className="button-style"
+                onClick={()=>{firebase.auth().signOut()}}
+                />
+            }
         </Box>
     )
 }

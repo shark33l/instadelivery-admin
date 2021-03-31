@@ -135,7 +135,7 @@ const DataTablePanel = (props) => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {trackingData ? trackingData.map((tracked, index) => {
+                        {trackingData.length ? trackingData.map((tracked, index) => {
                                 return(
                                     <TableRow key={tracked.invoice}>
                                         <TableCell 
@@ -190,7 +190,9 @@ const DataTablePanel = (props) => {
                                     </TableRow>
                                 )
                         })
-                            : <Text>No Entries Found</Text>
+                            : <TableRow>
+                                <TableCell colSpan="5" align="center" pad={{vertical:"medium", horizontal: "small"}}><Text>😟 No Entries Found</Text></TableCell>
+                            </TableRow>
                         }
                     </TableBody>
                 </Table>

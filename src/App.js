@@ -1,17 +1,17 @@
-import { Box, Grid, Grommet } from 'grommet';
 import React from 'react';
+import { Box, Grommet } from 'grommet';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import "./app.css"
 
 
 // import custom components
-import Header from './components/header'
-import AddPanel from './components/panels/addPanel'
-import DataTablePanel from "./components/panels/dataTablePanel"
+import Header from './components/header';
+import Dashboard from './components/dashboard';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './components/Login'
+import {AuthProvider} from './Auth';
 
 function App() {
-
-  const [editData, setEditData] = React.useState({});
-  const [loadFirebaseData, setLoadFirebaseData] = React.useState(true)
 
   const theme = {
     global: {
@@ -30,25 +30,15 @@ function App() {
 
   return (
     <Grommet theme={theme}>
-      <Box fill background="light-2">
-        <Header/>
-        <Grid
-          rows={['large']}
-          columns={['medium', 'auto']}
-          gap="xsmall"
-          areas={[
-            { name: 'add-panel', start: [0, 0], end: [0, 0] },
-            { name: 'data-panel', start: [1, 0], end: [1, 0] },
-          ]}
-        >
-          <Box pad={{vertical: "medium", horizontal: "medium"}} gridArea="add-panel" background="white">
-            <AddPanel editData={editData} setEditData={setEditData} loadFirebaseData={loadFirebaseData} setLoadFirebaseData={setLoadFirebaseData}/>
-          </Box>
-          <Box pad={{vertical: "large", horizontal: "medium"}} gridArea="data-panel" background="white">
-            <DataTablePanel setEditData={setEditData} loadFirebaseData={loadFirebaseData}/>
-          </Box>
-        </Grid>
-      </Box>
+      <AuthProvider>
+        <Box fill background="light-2">
+          <Header/>
+          <Router>
+            <PrivateRoute exact path="/" component={Dashboard}/>
+            <Route exact path="/login" component={Login} />
+          </Router>
+        </Box>
+      </AuthProvider>
     </Grommet>
   );
 }
