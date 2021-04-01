@@ -9,7 +9,7 @@ const ordersRef = db.collection(collectionName)
 const firebaseFunctions = { 
     setTrackingData : async(data, callback) => {
         try {
-            const firebaseResponse = await ordersRef.doc(data.invoice).set(data);
+            await ordersRef.doc(data.invoice).set(data);
             callback(null)
         } catch (error) {
             console.log(error);

@@ -237,7 +237,7 @@ const DataTablePanel = (props) => {
                                         </TableCell>
                                     </TableRow>
                                 )
-                            }
+                            } else return null
                         })
                             : <TableRow>
                                 <TableCell colSpan="5" align="center" pad={{vertical:"medium", horizontal: "small"}}><Text>😟 No Entries Found</Text></TableCell>
@@ -245,7 +245,7 @@ const DataTablePanel = (props) => {
                         }
                     </TableBody>
                 </Table>
-                <Box fill="horizontal" pad={{vertical: "medium"}}>
+                <Box fill="horizontal" pad={{top: "medium"}}>
                     <Pagination 
                         alignSelf="end" 
                         onChange= {({ page, startIndex, endIndex }) => { setPaginationData({page:page, startIndex:startIndex, endIndex:endIndex - 1}) }}

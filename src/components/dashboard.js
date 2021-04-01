@@ -13,7 +13,7 @@ const Dashboard = (props) => {
 
     return(
         <Grid
-          rows={['large']}
+          rows={['auto']}
           columns={['medium', 'auto']}
           gap="xsmall"
           areas={[
@@ -24,7 +24,7 @@ const Dashboard = (props) => {
           <Box size="vertical" animation={{type:"slideUp", delay:0, size:"large", duration:500}} pad={{vertical: "large", horizontal: "medium"}} gridArea="add-panel" background="white">
             <AddPanel editData={editData} setEditData={setEditData} loadFirebaseData={loadFirebaseData} setLoadFirebaseData={setLoadFirebaseData}/>
           </Box>
-          <Box animation={{type:"slideUp", delay:0, size:"large", duration:500}} pad={{top:"large", bottom:"xlarge", horizontal: "medium"}} gridArea="data-panel" background="white">
+          <Box animation={{type:"slideUp", delay:0, size:"large", duration:500}} pad={{top:"large", bottom:"medium", horizontal: "medium"}} gridArea="data-panel" background="white">
             <DataTablePanel setEditData={setEditData} loadFirebaseData={loadFirebaseData}/>
           </Box>
         </Grid>
