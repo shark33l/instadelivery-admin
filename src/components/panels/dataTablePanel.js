@@ -13,7 +13,7 @@ const DataTablePanel = (props) => {
 
     const [searchObject, setSearchObject] = React.useState([]);
     const [trackingData, setTrackingData] = React.useState([]);
-    const [paginationData, setPaginationData] = React.useState({page:1, startIndex:0, endIndex:step})
+    const [paginationData, setPaginationData] = React.useState({page:1, startIndex:0, endIndex:step-1})
     const [isLoadingData, setIsLoadingData] = React.useState(false);
 
     React.useEffect(() => {
@@ -251,7 +251,7 @@ const DataTablePanel = (props) => {
                 <Box fill="horizontal" pad={{vertical: "medium"}}>
                     <Pagination 
                         alignSelf="end" 
-                        onChange= {({ page, startIndex, endIndex }) => { setPaginationData({page:page, startIndex:startIndex, endIndex:endIndex}) }}
+                        onChange= {({ page, startIndex, endIndex }) => { setPaginationData({page:page, startIndex:startIndex, endIndex:endIndex - 1}) }}
                         step= {step}
                         numberItems={trackingData.length} />
                 </Box>
