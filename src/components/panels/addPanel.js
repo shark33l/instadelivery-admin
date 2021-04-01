@@ -64,7 +64,6 @@ const AddPanel = (props) => {
 
     React.useEffect(() => {
         if(props.editData && Object.keys(props.editData).length !== 0){
-            console.log("why", props.editData)
             changeToEditData(props.editData);
         }
     }, [props.editData])

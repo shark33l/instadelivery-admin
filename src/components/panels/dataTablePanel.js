@@ -11,13 +11,12 @@ const DataTablePanel = (props) => {
     // Steps for Pagination
     const step = 10;
 
-    const [searchObject, setSearchObject] = React.useState([]);
+    const [searchObject, setSearchObject] = React.useState({});
     const [trackingData, setTrackingData] = React.useState([]);
     const [paginationData, setPaginationData] = React.useState({page:1, startIndex:0, endIndex:step-1})
     const [isLoadingData, setIsLoadingData] = React.useState(false);
 
     React.useEffect(() => {
-        console.log(props)
         const fetchData = async () => {
             setIsLoadingData(true);
             const responseData = await firebaseFunctions.getAllTrackingData();
@@ -25,7 +24,6 @@ const DataTablePanel = (props) => {
                 console.log(responseData.error);
             } else {
                 setTrackingData(responseData.response);
-                console.log(responseData.response)
             }
             setIsLoadingData(false);
         }
@@ -96,7 +94,6 @@ const DataTablePanel = (props) => {
             } else {
                 const filteredData = searchTerm !== undefined ? getFilteredData(responseData.response, searchTerm) : responseData.response;
                 setTrackingData(filteredData);
-                console.log(filteredData)
             }
         setIsLoadingData(false);
     }
