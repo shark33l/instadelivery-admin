@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box, Button, TextInput, Table, TableHeader, TableRow, TableCell, TableBody, Text, Form, FormField, Spinner } from 'grommet';
-import { Search, FormEdit, CircleAlert } from 'grommet-icons';
+import { Box, Button, TextInput, Table, TableHeader, TableRow, TableCell, TableBody, Text, Form, FormField, Spinner, Pagination } from 'grommet';
+import { Search, FormEdit } from 'grommet-icons';
 
 // custom exported functions
 import firebaseFunctions from "../../firebaseFunctions.js";
@@ -8,9 +8,13 @@ import helper from "../../helperFunctions.js"
 
 const DataTablePanel = (props) => {
 
+    // Steps for Pagination
+    const step = 10;
+
     const [searchObject, setSearchObject] = React.useState([]);
     const [trackingData, setTrackingData] = React.useState([]);
-    const [isLoadingData, setIsLoadingData] = React.useState(false)
+    const [paginationData, setPaginationData] = React.useState({page:1, startIndex:0, endIndex:step})
+    const [isLoadingData, setIsLoadingData] = React.useState(false);
 
     React.useEffect(() => {
         console.log(props)
@@ -30,25 +34,70 @@ const DataTablePanel = (props) => {
 
     },[props.loadFirebaseData])
 
+    // Filter data as per the search term
+    const getFilteredData = (trackingData, searchTerm) => {
+        const result = trackingData.filter((data) => {
+            let filterData = false;
+            for( const [key, value] of Object.entries(data) ){
+                // filter for name and invoice
+                if(key === "name" || key === "invoice"){
+                    if(value.toLowerCase().includes(searchTerm.toLowerCase())){
+                        filterData = true;
+                        break;
+                    }
+                }
+
+                // Get final state values
+                const finalState = getFinalState(data);
+                if(finalState.status.toLowerCase().includes(searchTerm.toLowerCase()) || finalState.date.includes(searchTerm)){
+                    filterData = true;
+                    break;
+                }
+
+                // Get date in string
+                if(helper.formatDate(finalState.date).toLowerCase().includes(searchTerm.toLowerCase())){
+                    filterData = true;
+                    break;
+                }
+            }
+
+            return filterData;
+        })
+
+        return result;
+    }
+
     const getSearchedData = async(searchTerm) => {
         setIsLoadingData(true);
-        if(!searchTerm){
-            const responseData = await firebaseFunctions.getAllTrackingData();
+
+        // Filter Done in Firebase
+        // if(!searchTerm){
+        //     const responseData = await firebaseFunctions.getAllTrackingData();
+        //     if(responseData.error){
+        //         console.log(responseData.error);
+        //     } else {
+        //         setTrackingData(responseData.response);
+        //         console.log(responseData.response)
+        //     }
+        // } else {
+        //     const responseData = await firebaseFunctions.searchTrackingData(searchTerm);
+        //     if(responseData.error){
+        //         console.log(responseData.error);
+        //     } else {
+        //         setTrackingData(responseData.response);
+        //         console.log(responseData.response)
+        //     }
+        // }
+
+        // Filter done from front end
+        const responseData = await firebaseFunctions.getAllTrackingData();
             if(responseData.error){
                 console.log(responseData.error);
             } else {
-                setTrackingData(responseData.response);
-                console.log(responseData.response)
+                const filteredData = searchTerm !== undefined ? getFilteredData(responseData.response, searchTerm) : responseData.response;
+                setTrackingData(filteredData);
+                console.log(filteredData)
             }
-        } else {
-            const responseData = await firebaseFunctions.searchTrackingData(searchTerm);
-            if(responseData.error){
-                console.log(responseData.error);
-            } else {
-                setTrackingData(responseData.response);
-                console.log(responseData.response)
-            }
-        }
         setIsLoadingData(false);
     }
 
@@ -100,7 +149,7 @@ const DataTablePanel = (props) => {
                         <Box direction="row">
                             <FormField>
                                 <TextInput
-                                    placeholder="Search by invoice here"
+                                    placeholder="Search by any"
                                     name="searchTerm"
                                     icon={<Search/>}
                                 />
@@ -136,6 +185,8 @@ const DataTablePanel = (props) => {
                     </TableHeader>
                     <TableBody>
                         {trackingData.length ? trackingData.map((tracked, index) => {
+
+                            if(index>= paginationData.startIndex && index <= paginationData.endIndex){
                                 return(
                                     <TableRow key={tracked.invoice}>
                                         <TableCell 
@@ -189,6 +240,7 @@ const DataTablePanel = (props) => {
                                         </TableCell>
                                     </TableRow>
                                 )
+                            }
                         })
                             : <TableRow>
                                 <TableCell colSpan="5" align="center" pad={{vertical:"medium", horizontal: "small"}}><Text>😟 No Entries Found</Text></TableCell>
@@ -196,6 +248,13 @@ const DataTablePanel = (props) => {
                         }
                     </TableBody>
                 </Table>
+                <Box fill="horizontal" pad={{vertical: "medium"}}>
+                    <Pagination 
+                        alignSelf="end" 
+                        onChange= {({ page, startIndex, endIndex }) => { setPaginationData({page:page, startIndex:startIndex, endIndex:endIndex}) }}
+                        step= {step}
+                        numberItems={trackingData.length} />
+                </Box>
                 </Box>
             </Box>
         </>
