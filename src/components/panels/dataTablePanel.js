@@ -12,6 +12,7 @@ const DataTablePanel = (props) => {
     const step = 10;
 
     const [searchObject, setSearchObject] = React.useState({});
+    const [searchTerm, setSearchTerm] = React.useState('');
     const [trackingData, setTrackingData] = React.useState([]);
     const [paginationData, setPaginationData] = React.useState({page:1, startIndex:0, endIndex:step-1})
     const [isLoadingData, setIsLoadingData] = React.useState(false);
@@ -95,6 +96,7 @@ const DataTablePanel = (props) => {
                 const filteredData = searchTerm !== undefined ? getFilteredData(responseData.response, searchTerm) : responseData.response;
                 setTrackingData(filteredData);
             }
+        setSearchTerm(searchTerm);
         setIsLoadingData(false);
     }
 
@@ -159,6 +161,11 @@ const DataTablePanel = (props) => {
                     {isLoadingData && <Spinner size="medium" align="end"/>}
 
                 </Box>
+                {searchTerm &&
+                    <Box>
+                        <Text>Search results for "{searchTerm}"</Text>
+                    </Box>
+                }
                 <Box margin={{"vertical": "large"}}>
                 <Table>
                     <TableHeader>
