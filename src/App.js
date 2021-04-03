@@ -6,6 +6,7 @@ import "./App.css"
 
 // import custom components
 import Header from './components/header';
+import FooterUI from './components/footer';
 import Dashboard from './components/dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './components/Login'
@@ -22,8 +23,8 @@ function App() {
       },
       font: {
         family: 'Poppins',
-        size: '16px',
-        height: '18px',
+        size: '14px',
+        height: '16px',
       },
     },
   };
@@ -38,6 +39,7 @@ function App() {
             <Route exact path="/login" component={Login} />
           </Router>
         </Box>
+        <FooterUI />
       </AuthProvider>
     </Grommet>
   );

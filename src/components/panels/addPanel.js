@@ -91,7 +91,7 @@ const AddPanel = (props) => {
             {entryType === 0 ?
                 <Heading level="4" style={{marginTop: 0}}>Add New Entry</Heading>
                 :
-                <Heading level="4">Edit Existing Entry : <span style={{color: "#a1a1a1"}}>{props.editData ? props.editData.invoice : ''}</span></Heading>
+                <Heading level="4" style={{marginTop: 0}}>Edit Existing Entry : <span style={{color: "#a1a1a1"}}>{props.editData ? props.editData.invoice : ''}</span></Heading>
             }
             <Form
                 ref={entryFormRef}
@@ -101,13 +101,13 @@ const AddPanel = (props) => {
                 onSubmit={({ value }) => { submitEntry(value) }}
                 defaultValue={{invoice:"", name:""}}
             >
-                <FormField name="invoice" htmlFor="invoice-id" label="Invoice Number" required>
+                <FormField name="invoice" htmlFor="invoice-id" label={<Text size="small">Invoice Number</Text>} required>
                     <TextInput id="invoice-id" name="invoice" disabled={entryType===1}/>
                 </FormField>
-                <FormField name="name" htmlFor="text-input-id" label="Name" required>
+                <FormField name="name" htmlFor="text-input-id" label={<Text size="small">Name</Text>} required>
                     <TextInput id="name-id" name="name" />
                 </FormField>
-                <FormField name="ordered_date" htmlFor="ordered_date-id" label="Ordered Date" required>
+                <FormField name="ordered_date" htmlFor="ordered_date-id" label={<Text size="small">Ordered Date</Text>} required>
                     <DateInput
                         id="ordered_date-id"
                         name="ordered_date"
@@ -115,7 +115,7 @@ const AddPanel = (props) => {
                     />
                 </FormField>
                 {value.ordered_date &&
-                 <FormField name="ready_date" htmlFor="ready_date-id" label="Ready Date">
+                 <FormField name="ready_date" htmlFor="ready_date-id" label={<Text size="small">Ready Date</Text>}>
                     <DateInput
                         id="ready_date-id"
                         name="ready_date"
@@ -124,7 +124,7 @@ const AddPanel = (props) => {
                 </FormField>
                 }
                 {value.ready_date &&
-                <FormField name="shipped_date" htmlFor="shipped_date-id" label="Shipped Date">
+                <FormField name="shipped_date" htmlFor="shipped_date-id" label={<Text size="small">Shipped Date</Text>}>
                     <DateInput
                         id="shipped_date-id"
                         name="shipped_date"
@@ -133,7 +133,7 @@ const AddPanel = (props) => {
                 </FormField>
                 }
                 {value.shipped_date &&
-                <FormField name="received_date" htmlFor="received_date-id" label="Received Date">
+                <FormField name="received_date" htmlFor="received_date-id" label={<Text size="small">Received Date</Text>}>
                     <DateInput
                         id="received_date-id"
                         name="received_date"
@@ -142,7 +142,7 @@ const AddPanel = (props) => {
                 </FormField>
                 }
                 {value.received_date &&
-                <FormField name="delivered_date" htmlFor="delivered_date-id" label="Delivered Date">
+                <FormField name="delivered_date" htmlFor="delivered_date-id" label={<Text size="small">Delivered Date</Text>}>
                     <DateInput
                         id="delivered_date-id"
                         name="delivered_date"
