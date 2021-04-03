@@ -39,7 +39,7 @@ function App() {
             <Route exact path="/login" component={Login} />
           </Router>
         </Box>
-        <FooterUI />
+        {/* <FooterUI /> */}
       </AuthProvider>
     </Grommet>
   );
