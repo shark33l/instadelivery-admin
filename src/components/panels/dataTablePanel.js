@@ -108,14 +108,15 @@ const DataTablePanel = (props) => {
 
     const getFinalState = (data) => {
         
-        let keys = ["delivered_date","received_date","shipped_date","ready_date","ordered_date"];
+        let keys = ["delivered_date","pickup_date","on_the_way_date","processing_date","ordered_date"];
+        let keyNames = ["Delivered", "Ready for Pickup", "On the Way", "Processing", "Ordered"]
         let colors = ["#00873D", "#00C781", "#FFCA58", "#fa9200", "#FF4040"]
         let finalStatus = {};
 
         for(let i=0; i < keys.length; i++){
             if(keys[i] in data){
                 finalStatus = {
-                    status : (keys[i].split('_')[0]),
+                    status : keyNames[i],
                     date : data[keys[i]].toLocaleString(),
                     color : colors[i]
                 }

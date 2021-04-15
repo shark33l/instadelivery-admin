@@ -115,38 +115,50 @@ const AddPanel = (props) => {
                     />
                 </FormField>
                 {value.ordered_date &&
-                 <FormField name="ready_date" htmlFor="ready_date-id" label={<Text size="small">Ready Date</Text>}>
+                 <FormField name="processing_date" htmlFor="processing_date-id" label={<Text size="small">Processing Date</Text>}>
                     <DateInput
-                        id="ready_date-id"
-                        name="ready_date"
+                        id="processing_date-id"
+                        name="processing_date"
                         format="mm/dd/yyyy"
+                        calendarProps= {{
+                            bounds : [value.ordered_date, new Date(new Date().setFullYear(new Date().getFullYear() + 1))]
+                        }}
                     />
                 </FormField>
                 }
-                {value.ready_date &&
-                <FormField name="shipped_date" htmlFor="shipped_date-id" label={<Text size="small">Shipped Date</Text>}>
+                {value.processing_date &&
+                <FormField name="on_the_way_date" htmlFor="on_the_way_date-id" label={<Text size="small">On the Way Date</Text>}>
                     <DateInput
-                        id="shipped_date-id"
-                        name="shipped_date"
+                        id="on_the_way_date-id"
+                        name="on_the_way_date"
                         format="mm/dd/yyyy"
+                        calendarProps= {{
+                            bounds : [value.processing_date, new Date(new Date().setFullYear(new Date().getFullYear() + 1))]
+                        }}
                     />
                 </FormField>
                 }
-                {value.shipped_date &&
-                <FormField name="received_date" htmlFor="received_date-id" label={<Text size="small">Received Date</Text>}>
+                {value.on_the_way_date &&
+                <FormField name="pickup_date" htmlFor="pickup_date-id" label={<Text size="small">Pickup Date</Text>}>
                     <DateInput
-                        id="received_date-id"
-                        name="received_date"
+                        id="pickup_date-id"
+                        name="pickup_date"
                         format="mm/dd/yyyy"
+                        calendarProps= {{
+                            bounds : [value.on_the_way_date, new Date(new Date().setFullYear(new Date().getFullYear() + 1))]
+                        }}
                     />
                 </FormField>
                 }
-                {value.received_date &&
+                {value.pickup_date &&
                 <FormField name="delivered_date" htmlFor="delivered_date-id" label={<Text size="small">Delivered Date</Text>}>
                     <DateInput
                         id="delivered_date-id"
                         name="delivered_date"
                         format="mm/dd/yyyy"
+                        calendarProps= {{
+                            bounds : [value.pickup_date, new Date(new Date().setFullYear(new Date().getFullYear() + 1))]
+                        }}
                     />
                 </FormField>
                 }
