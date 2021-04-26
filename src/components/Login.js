@@ -1,13 +1,16 @@
 import React, { useCallback, useContext, useState } from "react";
 import { withRouter, Redirect } from "react-router";
-import firebase from "../firebase";
 import { AuthContext } from "../Auth.js";
 import { Box, Card, CardBody, Heading, Text, Form, FormField, TextInput, Button  } from "grommet";
+import databaseFunctions from "../databaseFunctions";
 
 const Login = ({ history }) => {
 
   const [alertError, setAlertError] = useState({error: false, message: ""});
   const [credentials, setCredentials] = React.useState({});
+
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+
 
   const handleLogin = useCallback(
     async (credentials) => {
@@ -16,13 +19,20 @@ const Login = ({ history }) => {
       const email = credentials.email;
       const password = credentials.password;
 
-      console.log(credentials)
-      console.log(password)
       try {
-        await firebase
-          .auth()
-          .signInWithEmailAndPassword(email, password);
-        history.push("/");
+        databaseFunctions.loginUser({username: email, password:password}, (error, response) => {
+          if(!error && response.jwt){
+            localStorage.setItem("accessToken", response.jwt);
+            setCurrentUser(response.jwt)
+            history.push("/");
+          } else {
+            console.log(error);
+            setAlertError({
+              error: true,
+              message: error
+            });
+          }
+        })
       } catch (error) {
         console.log(error);
         setAlertError({
@@ -33,8 +43,6 @@ const Login = ({ history }) => {
     },
     [history]
   );
-
-  const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
     return <Redirect to="/" />;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import firebase from "./firebase.js";
 
 export const AuthContext = React.createContext();
 
@@ -8,11 +7,19 @@ export const AuthProvider = ({ children }) => {
   const [pending, setPending] = useState(true);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      setCurrentUser(user)
-      setPending(false)
-    });
-  }, []);
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   setCurrentUser(user)
+    //   setPending(false)
+    // });
+
+    let accessToken = localStorage.getItem("accessToken");
+    if(currentUser !== accessToken){
+      setCurrentUser(accessToken);
+    }
+
+    setPending(false);
+
+  }, [currentUser]);
 
   if(pending){
     return <>Loading...</>
@@ -21,7 +28,8 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        currentUser
+        currentUser,
+        setCurrentUser
       }}
     >
       {children}

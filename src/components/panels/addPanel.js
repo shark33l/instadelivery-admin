@@ -3,10 +3,16 @@ import { Box, Heading, Form, FormField, TextInput, Button, DateInput, Spinner, T
 import { AddCircle } from 'grommet-icons';
 
 // Firebase
-import firebaseFunctions from "../../firebaseFunctions.js";
+import databaseFunctions from "../../databaseFunctions.js";
+import { AuthContext } from "../../Auth.js";
+
 
 
 const AddPanel = (props) => {
+
+    // Context from consumer
+    const { currentUser } = React.useContext(AuthContext);
+
     const [entryType, setEntryType] = React.useState(0)
     const [value, setValue] = React.useState({});
     const [loading, setLoading] = React.useState(false);
@@ -45,7 +51,7 @@ const AddPanel = (props) => {
         value.invoice = value.invoice.toUpperCase();
         value = validateValues(value);
         setLoading(true);
-        firebaseFunctions.setTrackingData(value, function(error){
+        databaseFunctions.setTrackingData(value, currentUser, function(error){
             if(error){
                 console.log("Error occured");
             } else {
@@ -127,10 +133,10 @@ const AddPanel = (props) => {
                 </FormField>
                 }
                 {value.processing_date &&
-                <FormField name="on_the_way_date" htmlFor="on_the_way_date-id" label={<Text size="small">On the Way Date</Text>}>
+                <FormField name="ontheway_date" htmlFor="ontheway_date-id" label={<Text size="small">On the Way Date</Text>}>
                     <DateInput
-                        id="on_the_way_date-id"
-                        name="on_the_way_date"
+                        id="ontheway_date-id"
+                        name="ontheway_date"
                         format="mm/dd/yyyy"
                         calendarProps= {{
                             bounds : [value.processing_date, new Date(new Date().setFullYear(new Date().getFullYear() + 1))]
@@ -138,14 +144,14 @@ const AddPanel = (props) => {
                     />
                 </FormField>
                 }
-                {value.on_the_way_date &&
+                {value.ontheway_date &&
                 <FormField name="pickup_date" htmlFor="pickup_date-id" label={<Text size="small">Pickup Date</Text>}>
                     <DateInput
                         id="pickup_date-id"
                         name="pickup_date"
                         format="mm/dd/yyyy"
                         calendarProps= {{
-                            bounds : [value.on_the_way_date, new Date(new Date().setFullYear(new Date().getFullYear() + 1))]
+                            bounds : [value.ontheway_date, new Date(new Date().setFullYear(new Date().getFullYear() + 1))]
                         }}
                     />
                 </FormField>

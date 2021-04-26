@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Grommet } from 'grommet';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import "./App.css"
 
 
 // import custom components
 import Header from './components/header';
-import FooterUI from './components/footer';
+// import FooterUI from './components/footer';
 import Dashboard from './components/dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './components/Login'

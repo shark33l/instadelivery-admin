@@ -3,7 +3,7 @@ import { Box, Button, TextInput, Table, TableHeader, TableRow, TableCell, TableB
 import { Search, FormEdit } from 'grommet-icons';
 
 // custom exported functions
-import firebaseFunctions from "../../firebaseFunctions.js";
+import databaseFunctions from "../../databaseFunctions.js";
 import helper from "../../helperFunctions.js"
 
 const DataTablePanel = (props) => {
@@ -20,7 +20,7 @@ const DataTablePanel = (props) => {
     React.useEffect(() => {
         const fetchData = async () => {
             setIsLoadingData(true);
-            const responseData = await firebaseFunctions.getAllTrackingData();
+            const responseData = await databaseFunctions.getAllTrackingData();
             if(responseData.error){
                 console.log(responseData.error);
             } else {
@@ -69,27 +69,8 @@ const DataTablePanel = (props) => {
     const getSearchedData = async(searchTerm) => {
         setIsLoadingData(true);
 
-        // Filter Done in Firebase
-        // if(!searchTerm){
-        //     const responseData = await firebaseFunctions.getAllTrackingData();
-        //     if(responseData.error){
-        //         console.log(responseData.error);
-        //     } else {
-        //         setTrackingData(responseData.response);
-        //         console.log(responseData.response)
-        //     }
-        // } else {
-        //     const responseData = await firebaseFunctions.searchTrackingData(searchTerm);
-        //     if(responseData.error){
-        //         console.log(responseData.error);
-        //     } else {
-        //         setTrackingData(responseData.response);
-        //         console.log(responseData.response)
-        //     }
-        // }
-
         // Filter done from front end
-        const responseData = await firebaseFunctions.getAllTrackingData();
+        const responseData = await databaseFunctions.getAllTrackingData();
             if(responseData.error){
                 console.log(responseData.error);
             } else {
@@ -108,13 +89,13 @@ const DataTablePanel = (props) => {
 
     const getFinalState = (data) => {
         
-        let keys = ["delivered_date","pickup_date","on_the_way_date","processing_date","ordered_date"];
+        let keys = ["delivered_date","pickup_date","ontheway_date","processing_date","ordered_date"];
         let keyNames = ["Delivered", "Ready for Pickup", "On the Way", "Processing", "Ordered"]
         let colors = ["#00873D", "#00C781", "#FFCA58", "#fa9200", "#FF4040"]
         let finalStatus = {};
 
         for(let i=0; i < keys.length; i++){
-            if(keys[i] in data){
+            if(keys[i] in data && data[keys[i]]){
                 finalStatus = {
                     status : keyNames[i],
                     date : data[keys[i]].toLocaleString(),

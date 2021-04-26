@@ -1,7 +1,5 @@
 import React from 'react';
-import { Box, Anchor, Footer, Text } from 'grommet';
-import { Github } from 'grommet-icons';
-
+import { Footer, Text } from 'grommet';
 
 
 const FooterUI = (props) => {
