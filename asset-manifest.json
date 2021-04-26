@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/instadelivery-admin/static/css/main.fce05194.chunk.css",
-    "main.js": "/instadelivery-admin/static/js/main.98e1ed0d.chunk.js",
-    "main.js.map": "/instadelivery-admin/static/js/main.98e1ed0d.chunk.js.map",
-    "runtime-main.js": "/instadelivery-admin/static/js/runtime-main.07c77918.js",
-    "runtime-main.js.map": "/instadelivery-admin/static/js/runtime-main.07c77918.js.map",
-    "static/js/2.2aea4b7d.chunk.js": "/instadelivery-admin/static/js/2.2aea4b7d.chunk.js",
-    "static/js/2.2aea4b7d.chunk.js.map": "/instadelivery-admin/static/js/2.2aea4b7d.chunk.js.map",
-    "static/js/3.165b2dde.chunk.js": "/instadelivery-admin/static/js/3.165b2dde.chunk.js",
-    "static/js/3.165b2dde.chunk.js.map": "/instadelivery-admin/static/js/3.165b2dde.chunk.js.map",
+    "main.css": "/instadelivery-admin/static/css/main.c5b5a7cd.chunk.css",
+    "main.js": "/instadelivery-admin/static/js/main.c871004e.chunk.js",
+    "main.js.map": "/instadelivery-admin/static/js/main.c871004e.chunk.js.map",
+    "runtime-main.js": "/instadelivery-admin/static/js/runtime-main.ac1d2c5f.js",
+    "runtime-main.js.map": "/instadelivery-admin/static/js/runtime-main.ac1d2c5f.js.map",
+    "static/js/2.e7d622be.chunk.js": "/instadelivery-admin/static/js/2.e7d622be.chunk.js",
+    "static/js/2.e7d622be.chunk.js.map": "/instadelivery-admin/static/js/2.e7d622be.chunk.js.map",
+    "static/js/3.e1c95a1e.chunk.js": "/instadelivery-admin/static/js/3.e1c95a1e.chunk.js",
+    "static/js/3.e1c95a1e.chunk.js.map": "/instadelivery-admin/static/js/3.e1c95a1e.chunk.js.map",
     "index.html": "/instadelivery-admin/index.html",
-    "static/css/main.fce05194.chunk.css.map": "/instadelivery-admin/static/css/main.fce05194.chunk.css.map",
-    "static/js/2.2aea4b7d.chunk.js.LICENSE.txt": "/instadelivery-admin/static/js/2.2aea4b7d.chunk.js.LICENSE.txt",
+    "static/css/main.c5b5a7cd.chunk.css.map": "/instadelivery-admin/static/css/main.c5b5a7cd.chunk.css.map",
+    "static/js/2.e7d622be.chunk.js.LICENSE.txt": "/instadelivery-admin/static/js/2.e7d622be.chunk.js.LICENSE.txt",
     "static/media/instabuylogo.7f11e31c.png": "/instadelivery-admin/static/media/instabuylogo.7f11e31c.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.07c77918.js",
-    "static/js/2.2aea4b7d.chunk.js",
-    "static/css/main.fce05194.chunk.css",
-    "static/js/main.98e1ed0d.chunk.js"
+    "static/js/runtime-main.ac1d2c5f.js",
+    "static/js/2.e7d622be.chunk.js",
+    "static/css/main.c5b5a7cd.chunk.css",
+    "static/js/main.c871004e.chunk.js"
   ]
 }
